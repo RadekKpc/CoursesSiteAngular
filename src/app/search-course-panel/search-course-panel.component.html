@@ -1,0 +1,64 @@
+<hr>
+<br>
+<div class='col-12 text-center'>
+    <h1>Wyszukaj kurs</h1>
+<br>
+<hr>
+<!-- <div class="row" id="sem">
+    <div class='col-1'>
+        <label class="form-check-label" for="s1">1</label>
+        <input [(ngModel)]='searchSemestr[1]' class="form-check-input "  type="checkbox" id="s1">
+    </div>
+    <div class='col-1'>
+        <label class="form-check-label" for="s2">2</label>
+        <input [(ngModel)]='searchSemestr[2]' class="form-check-input "  type="checkbox" id="s2">
+    </div>
+    <div class='col-1'>
+        <label class="form-check-label" for="s3">3</label>
+        <input [(ngModel)]='searchSemestr[3]' class="form-check-input "  type="checkbox" id="s3">
+    </div>
+    <div class='col-1'>
+        <label class="form-check-label" for="s4">4</label>
+        <input [(ngModel)]='searchSemestr[4]' class="form-check-input "  type="checkbox" id="s4">
+    </div>
+    <div class='col-1'>
+        <label class="form-check-label" for="s5">5</label>
+        <input [(ngModel)]='searchSemestr[5]' class="form-check-input "  type="checkbox" id="s5">
+    </div>
+    <div class='col-1'>
+        <label class="form-check-label" for="s6">6</label>
+        <input [(ngModel)]='searchSemestr[6]' class="form-check-input "  type="checkbox" id="s6">
+    </div>
+    <div class='col-1'>
+        <label class="form-check-label" for="s7">7</label>
+        <input [(ngModel)]='searchSemestr[7]' class="form-check-input "  type="checkbox" id="s7">
+    </div>
+</div> -->
+
+<label for="minSem"><h5>Semestr:</h5><br><b>min: </b>{{minSem}}</label>
+<input [(ngModel)]="minSem" type="range" class="custom-range" min="0" max="7" step="1"id="minSem">
+
+<br>
+<label for="maxSem" ><b>max: </b>{{maxSem}}</label>
+<input [(ngModel)]="maxSem" type="range" class="custom-range" min="0" max="7" step="1"id="maxSem">
+
+<br>
+<label for="desc" ><h5>Nazwa:</h5></label>
+<input [(ngModel)]="searchName" class="form-control col-12" id="name" aria-describedby="nameError">
+
+<br>
+<label for="minRating" ><h5>Przedział średniej ocen</h5><br><b>min:</b>{{minRating}}</label>
+<input [(ngModel)]="minRating" type="range" class="custom-range" min="0" max="10" step="0.1"id="minRating">
+
+<label for="maxRating"><b>max </b>{{maxRating}}</label>
+<input [(ngModel)]="maxRating" type="range" class="custom-range" min="0" max="10" step="0.1"id="maxRating">
+
+<br>
+<label for="minRating" ><h5>Przedział punktów ECTS</h5><br><b>min:</b>{{minEcts}}</label>
+<input [(ngModel)]="minEcts" type="range" class="custom-range" min="0" max="100" step="1"id="minRating">
+
+<label for="maxRating"><b>max </b>{{maxEcts}}</label>
+<input [(ngModel)]="maxEcts" type="range" class="custom-range" min="0" max="32" step="1"id="maxRating">
+<button (click)='onChangeProperties()' class='btn btn-success'>Szukaj</button>
+<!-- <small  *ngIf="formErrors.desc" class="form-text text-muted" id="descError">{{ formErrors.desc }}</small> -->
+</div>

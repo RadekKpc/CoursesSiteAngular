@@ -1,0 +1,65 @@
+<div class=' container '>
+<div class="row justify-content-center">
+
+<hr>
+<br>
+<div class='col-12 text-center'>
+<h1>Dodaj nowy kurs</h1>
+<br>
+</div>
+<form [formGroup]="modelForm" (ngSubmit)="onSubmit(modelForm)">
+    <div class='form-group'>
+        <div class=''></div>
+        <label for="name" >Nazwa:</label>
+        <input name="name" class="form-control col-12 " id="name" formControlName="name" aria-describedby="nameError">
+        <small  *ngIf="formErrors.name" class="form-text text-muted" id="nameError">{{ formErrors.name }}</small>
+    </div>
+<div class='form-group'>
+    <label for="ects" >Liczba ECTS:</label>
+    <input name="ects" class="form-control col-12" id="ects" formControlName="ects" aria-describedby="ectsError">
+    <small  *ngIf="formErrors.ects" class="form-text text-muted" id="ectsError">{{ formErrors.ects }}</small>
+</div>
+<div class='form-group'>
+    <label for="maxStudents" >Maksymalna liczba studentów:</label>
+    <input name="maxStudents" class="form-control col-12" id="maxStudents" formControlName="maxStudents" aria-describedby="maxStudentsError">
+    <small  *ngIf="formErrors.maxStudents" class="form-text text-muted" id="maxStudentsError">{{ formErrors.maxStudents }}</small>
+</div>
+<div class='form-group'>
+    <label for="forma" >Forma prowadzenia zajęć:</label>
+    <select name="forma" class="custom-select mr-sm-2" id="forma" formControlName="forma" aria-describedby="formaError">
+            <option value="Labolatoria">Labolatoria</option>
+            <option value="Wykłady">Wykłady</option>
+            <option value="Ćwiczenia">Ćwiczenia</option>
+            <option value="Projekt">Projekt</option>
+        </select>
+    <small  *ngIf="formErrors.forma" class="form-text text-muted" id="formaError">{{ formErrors.forma }}</small>
+</div>
+<div class='form-group'>
+    <label for="desc" >Opis:</label>
+    <input name="desc" class="form-control col-12" id="desc" formControlName="desc" aria-describedby="descError">
+    <small  *ngIf="formErrors.desc" class="form-text text-muted" id="descError">{{ formErrors.desc }}</small>
+</div>
+<div class='form-group'>
+    <label for="semestr" >Semestr:</label>
+    <select name="semestr" class="custom-select mr-sm-2" id="semestr" formControlName="semestr" aria-describedby="semestrError">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+    </select>
+    <small  *ngIf="formErrors.semestr" class="form-text text-muted" id="semestrError">{{ formErrors.semestr }}</small>
+</div>
+<div class='form-group'>
+        <label for="url" >Link do Obrazka:</label>
+        <input name="url" class="form-control col-12" id="url" formControlName="url" aria-describedby="urlError">
+        <small  *ngIf="formErrors.url" class="form-text text-muted" id="urlError">{{ formErrors.url }}</small>
+    </div>
+ <button [disabled]="!modelForm.valid" type="submit" class="btn btn-success" >Send</button>
+</form>
+
+
+</div>
+</div>

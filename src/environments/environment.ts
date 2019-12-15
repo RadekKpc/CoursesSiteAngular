@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: true,
+  firebase: {
+    apiKey: "AIzaSyByS0dP3Rc71dUV2fqTu7iySZvw8RHDwFw",
+    authDomain: "wdai-konferencje.firebaseapp.com",
+    databaseURL: "https://wdai-konferencje.firebaseio.com",
+    projectId: "wdai-konferencje",
+    storageBucket: "wdai-konferencje.appspot.com",
+    messagingSenderId: "537987745461",
+    appId: "1:537987745461:web:f2401e8fb184bc0b68a0fc",
+    measurementId: "G-ME45RXXRB2"
+  }
 };
 
 /*

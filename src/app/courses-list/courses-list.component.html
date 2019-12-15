@@ -1,0 +1,11 @@
+<!-- dodac zebre -->
+<div class="container" >
+    <app-search-course-panel (propertiesAreChanged)="searchCourses($event)">
+    </app-search-course-panel>
+    <div class='row' >
+        <div class='col-12 col-sm-6 col-md-4 col-lg-3' style='margin-top: 20px; margin-bottom: 20px' *ngFor="let cours of courses | keyvalue | valuesPipe | searchPipe : searchName | searchPipeSemestr : minSem : maxSem | searchPipeRatingRange : minRating : maxRating | searchPipeEctsRange : minEcts : maxEcts">
+            <app-course [cours] = "cours" (coursIsDeleted)="deleteCourse($event)"></app-course>
+        </div>
+    </div>
+
+</div>

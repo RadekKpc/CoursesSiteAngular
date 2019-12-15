@@ -1,0 +1,23 @@
+<div style='margin-top: 60px ' class='container'>
+    <form [formGroup]="registerForm">
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" formControlName="email" class="form-control" required>
+        </div>
+        <!-- <div class="form-group">
+        <label>Imię</label>
+            <input type="text" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>Nazwisko</label>
+            <input type="text" class="form-control" required>
+        </div> -->
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" formControlName="password" required>
+          <label class="error">{{errorMessage}}</label>
+          <label class="success">{{successMessage}}</label>
+        </div>
+        <button type="submit" (click)="tryJoin(registerForm.value)" class="btn btn-success">Join</button>
+     </form>
+    </div>
