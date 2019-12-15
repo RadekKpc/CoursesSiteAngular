@@ -4,6 +4,9 @@ import * as firebase from 'firebase/app';
 import {Router} from "@angular/router";
 import {Observable} from 'rxjs';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import {AngularFireDatabase} from '@angular/fire/database';
+import User from './Interfaces/user';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +14,7 @@ export class AuthService {
 
   userData: Observable<firebase.User>;
 
-  constructor(public afAuth: AngularFireAuth,private router: Router){
+  constructor(public afAuth: AngularFireAuth,private router: Router,private db: AngularFireDatabase){
 
     this.userData = afAuth.authState;
   }
@@ -33,10 +36,25 @@ export class AuthService {
     .catch((error) => { console.log(error.message); window.alert(error.message); })
   }
 
-  SignUpUser(email, password){
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-    .then((result) => {})
-    .catch((error) => {window.alert(error.message)})
+  SignUpUser(email, password, lastName,name){
+  this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    .then((result) => {
+      let role = {
+        adding: false,
+        delete: false
+      }
+      let user: User ={
+      id: result.user.uid,
+      lastName: lastName,
+      name: name,
+      coursesRating: {},
+      cousresJoined: {},
+      role: role
+      }
+      this.db.list('users').set(String(result.user.uid),user);
+    })
+    .catch((error) => {window.alert(error.message);console.log(error.message);})
+
   }
 
   doRegister(value){

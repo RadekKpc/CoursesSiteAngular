@@ -40,10 +40,9 @@ export class AppComponent {
   ngOnInit(){
     this.authService.getUser().subscribe(
       user => {if(user != null){
-        console.log("Elo2 "+ user)
         this.userData = user;
 
-      }else{console.log("Elo "+ user);this.userData= new Object; this.userData={email: " "};}
+      }else{this.userData= new Object; this.userData={email: " "};}
 
       });
   }

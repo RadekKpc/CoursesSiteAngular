@@ -9,6 +9,7 @@ import Rating from '../Interfaces/rating';
 export class RatingComponent implements OnInit {
 
   @Input() rating: Rating;
+  @Input() userRating: number;
   @Output() coursIsRating: EventEmitter<number> = new EventEmitter<number>();
   hovered =0;
   constructor() { }

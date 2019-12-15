@@ -10,6 +10,7 @@ export interface Course {
     rating: Rating;
     desc: string;
     url: string;
+    occupiedPlaces: number;
  }
 
 export enum CourseForm {

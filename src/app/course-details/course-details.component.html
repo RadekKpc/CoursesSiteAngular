@@ -5,22 +5,24 @@
           <b>{{course.name}}</b>
         </div>
         <div class="card-body text-left text-white bg-warning mb-3">
-            <app-rating [rating] = "course.rating" (coursIsRating)="onSaveRating($event)"></app-rating>
+            <app-rating [userRating] = 'userRating'[rating] = "course.rating" (coursIsRating)="onSaveRating($event)"></app-rating>
         </div>
         <div class="card-body text-left">
           <h6 class="card-title text-center">Szczegóły</h6>
           <p class="card-text">Semetr: {{course.semestr}}</p>
           <p class="card-text">Liczba punktów ects: {{course.ects}}</p>
           <p class="card-text">Forma prowadzenia zajęć: {{course.forma}}</p>
-          <p class="card-text">Maksymalna liczba studentów: {{course.maxStudents}}</p>
+          <p class="card-text">Zjęte miejsca: {{course.occupiedPlaces}}/{{course.maxStudents}}</p>
         </div>
         <div class="card-body">
           <h6 class="card-title">Opis</h6>
           <p class="card-text text-left">{{course.desc}}</p>
         </div>
-        <div class="card-footer text-muted">
-            {{course.name}}
+        <div class="card-footer">
+          <button class='btn-light btn' (click)='tryJoinCourse()'>Zpisz się na {{course.name}}</button>
         </div>
+
       </div>
+      <ngb-alert [hidden]='message == ""' type="success">{{message}}</ngb-alert>
 
 </div>

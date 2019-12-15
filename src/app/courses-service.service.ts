@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Course} from './Interfaces/course';
-import {coursesMock} from './mockData/mockCourse';
-import {DataBaseService} from './data-base.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { relative } from 'path';
-
+import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +10,7 @@ export class CoursesServiceService {
 
   private courses: Object;
   private maxId :number;
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase,private authService: AuthService) {
     this.getMaxId().subscribe(id => this.maxId = id);
     this.getCourses().subscribe(courses => this.courses=courses);
    }
@@ -28,35 +25,57 @@ export class CoursesServiceService {
     while(Object.keys(this.courses).includes(String(this.maxId[0] + c)))c++;
     course.id = this.maxId[0]+c;
     this.db.list('kursy').set(String((this.maxId[0] + c)),course);
-    //upadtemaxID
+    this.db.list('maxId').set('maxId',this.maxId[0] + c);
   }
 
   getMaxId(): Observable<any>{
     return this.db.list('maxId').valueChanges();
   }
-  // constructor(private db: DataBaseService) {
-  //   this.courses = coursesMock;
-  // }
 
-  // addCours(cours: Course){
-  //   this.courses[cours.id]= cours;
-  // }
-
-  // getCourses(){
-  //  return this.db.getCourses();
-  // }
-
-  getCours(key: string){
-    return this.courses[key];
+  getCours(key: String){
+    return Object.values(this.courses).filter(course => {return course.id == key})[0];
   }
 
-  deleteCours(key: string){
+  deleteCours(key: String){
     this.db.list('kursy/' + key).remove();
   }
-  saveRating(key: string,rating: number){
-    if(this.courses[key].rating.userRating == 0)this.courses[key].rating.allRatingCounter = this.courses[key].rating.allRatingCounter+1;
-    this.courses[key].rating.sumRating = this.courses[key].rating.sumRating + rating - this.courses[key].rating.userRating;
-    this.courses[key].rating.userRating = rating;
 
+  joinCourse(id){
+    if(this.getCours(id).occupiedPlaces < this.getCours(id).maxStudents)
+    {
+      if(this.authService.isLoggedIn()){
+    this.db.list('kursy/' + id).set('occupiedPlaces',this.getCours(id).occupiedPlaces + 1);
+    this.db.list('kursy/' + id + '/users').set(this.authService.getCurrentuser().uid,true);
+      }else{
+        return false;
+      }
+    return true;
+   }
+    return false;
+  }
+  saveRating(id:String,rate:number){
+    let course = this.getCours(id);
+    let uid = this.authService.getCurrentuser().uid;
+    if((Object.entries(this.getCours(id).users).filter(ar => {return (ar[0] == uid && ar[1])}).length) == 1)
+    {
+      let oldRate = this.getUserRating(id);
+      if(oldRate == 0){
+    this.db.list('kursy/'+ id +'/rating/usersRating').set(this.authService.getCurrentuser().uid,rate);
+    this.db.list('kursy/'+ id +'/rating').set('allRatingCounter',course.rating.allRatingCounter + 1);
+    this.db.list('kursy/'+ id +'/rating').set('sumRating',course.rating.sumRating + rate);
+      }
+    else{
+    this.db.list('kursy/'+ id +'/rating/usersRating').set(this.authService.getCurrentuser().uid,rate);
+    this.db.list('kursy/'+ id +'/rating').set('sumRating',course.rating.sumRating + rate - oldRate);
+    }
+    return true;
+   }
+    return false;
+  }
+  getUserRating(id):any{
+    let uid = this.authService.getCurrentuser().uid;
+    let rate = Object.entries(this.getCours(id).rating.usersRating).filter(ar => {return (ar[0] == uid)});
+    if(rate.length == 0)return 0;
+    if(rate.length != 0)return rate[0][1] ? rate[0][1]  : 0;
   }
 }

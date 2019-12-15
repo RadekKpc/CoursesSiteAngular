@@ -24,7 +24,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   tryJoin(form){
-    this.authService.SignUpUser(form.email,form.password);
+    console.log(form);
+    this.authService.SignUpUser(form.email,form.password,form.lastName,form.name);
   }
 
 }

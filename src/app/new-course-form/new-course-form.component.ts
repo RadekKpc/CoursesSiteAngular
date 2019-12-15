@@ -103,9 +103,12 @@ onSubmit(modelForm){
   let rating: Rating = {
   allRatingCounter: 0,
   sumRating: 0,
+  users: {
+
+  }
   }
   let course:Course = {
-    id: 'S',
+    id: 'a',
     desc: modelForm.value.desc,
     forma: modelForm.value.forma,
     url: modelForm.value.url,
@@ -113,7 +116,8 @@ onSubmit(modelForm){
     maxStudents: modelForm.value.maxStudents,
     name: modelForm.value.name,
     rating: rating,
-    semestr: modelForm.value.semestr
+    semestr: modelForm.value.semestr,
+    occupiedPlaces: 0
   };
   this.coursesService.addCours(course);
 }
