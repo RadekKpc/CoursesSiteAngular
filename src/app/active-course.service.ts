@@ -6,7 +6,7 @@ import { from } from 'rxjs';
 })
 export class ActiveCourseService {
 
-  private activeCourse:number;
+  private activeCourse:number = null;
 
   constructor(private courses: CoursesServiceService) { }
 
@@ -15,6 +15,7 @@ export class ActiveCourseService {
   }
 
   getActiveCourse(){
+    if(this.activeCourse == null)return 'brak';
     return this.activeCourse;
   }
 }

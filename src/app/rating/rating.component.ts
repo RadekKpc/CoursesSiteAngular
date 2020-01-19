@@ -20,7 +20,7 @@ export class RatingComponent implements OnInit {
   onSaveRating(rate: number) :void{
     this.coursIsRating.emit(rate);
   }
-   Round(n: number, k: number)
+  Round(n: number, k: number)
   {
       let factor = Math.pow(10, k);
       return Math.round(n*factor)/factor;

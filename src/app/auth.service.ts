@@ -52,6 +52,7 @@ export class AuthService {
       role: role
       }
       this.db.list('users').set(String(result.user.uid),user);
+      this.router.navigate(['/list']);
     })
     .catch((error) => {window.alert(error.message);console.log(error.message);})
 

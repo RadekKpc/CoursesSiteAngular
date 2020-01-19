@@ -2,7 +2,7 @@
     <img class="card-img-top" src="{{cours.url}}" alt="{{cours.name}}" style="width:100%">
     <div class="card-body">
         <h4 class="card-title">{{cours.name}}</h4>
-        <button (click)="onDelete(cours.id)" class="btn btn-primary btn-danger">Delete</button>
+        <button (click)="onDelete(cours.id)" [hidden]='!cadD()' class="btn btn-primary btn-danger">Delete</button>
         <a routerLink='/details/{{cours.id}}' class="btn btn-primary btn-primary float-right">Więcej</a>
         <!-- <app-rating [rating] = "cours.rating" (coursIsRating)="onSaveRating($event)"></app-rating> -->
     </div>
